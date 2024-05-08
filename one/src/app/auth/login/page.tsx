@@ -1,8 +1,8 @@
+"use Client"
+import React from 'react'
 
-export default function LoginPage() {
+export const page = () => {
   return (
-    <div>
-      <h1>Hello Page</h1>
-    </div>
-  );
+    <h1>Hello, welcome</h1>
+  )
 }

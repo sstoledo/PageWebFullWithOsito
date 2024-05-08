@@ -1,12 +1,7 @@
-import { Button } from "@/components/Button";
-
 export default function Home() {
   return (
     <main>
-      
-      <Button/>
-
-
+      <h1>Hello world</h1>
     </main>
   );
 }
