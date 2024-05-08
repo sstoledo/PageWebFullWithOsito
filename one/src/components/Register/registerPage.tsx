@@ -1,41 +1,36 @@
 'use client';
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+type Inputs = {
+    username: string;
+    usernameRequired: string;
+    email: string;
+    emailRequired: string;
+    password: string;
+    passwordRequired: string;
+    confirmPassword: string;
+    confirmPasswordRequired: string;
+}
+
 export default function RegisterAccount() {
+
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
-    const router = useRouter();
+    } = useForm<Inputs>();
 
-    const onSubmit = handleSubmit(async (data) => {
-        if (data.password !== data.confirmPassword) {
-            return alert("Passwords do not match");
-        }
+    const onSubmit: SubmitHandler<Inputs> = (data) => {
+        
 
-        const res = await fetch("/api/auth/register", {
-            method: "POST",
-            body: JSON.stringify({
-                username: data.username,
-                email: data.email,
-                password: data.password,
-            }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        if (res.ok) {
-            router.push("/auth/login");
-        }
-    });
-
-    console.log(errors);
+    }
 
     return (
         <div className="h-[calc(100vh-7rem)] flex justify-center items-center">
-            <form onSubmit={onSubmit} className="w-1/4">
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="w-1/4"
+            >
                 <h1 className="text-slate-200 font-bold text-4xl mb-4">Register</h1>
 
                 <label htmlFor="username" className="text-slate-500 mb-2 block text-sm">
